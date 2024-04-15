@@ -1,8 +1,9 @@
 let items = ["Rock", "Paper", "Scissors"];
-let getComputerChoice = (items) => items[Math.floor(Math.random() * items.length)];
+let getComputerChoice = (items) =>
+  items[Math.floor(Math.random() * items.length)];
 
 // input: playerSelection, computerSelection
-// returns: 0, -1, 1
+// returns: 0 for tie, -1 for lose, 1 for win
 function playRound(playerSelection, computerSelection) {
   if (
     (playerSelection === "Rock" && computerSelection === "Paper") ||
@@ -22,7 +23,7 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "Scissors" && computerSelection === "Scissors")
   ) {
     return 0;
-}
+  }
 }
 
 function playGame() {
@@ -30,12 +31,16 @@ function playGame() {
   let computerScore = 0;
   let tie = 0;
 
-  for (let i = 0; i<5; i++) {
+  // call playRound function to play 5 rounds
+  // increase user or computer scores based on wins, losses, or ties
+  for (let i = 0; i < 5; i++) {
     let playerSelection = prompt("Rock, Paper, Scissors?");
     if (playerSelection == undefined) {
       return;
     }
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+    playerSelection =
+      playerSelection.charAt(0).toUpperCase() +
+      playerSelection.slice(1).toLowerCase();
     const computerSelection = getComputerChoice(items);
 
     const round = playRound(playerSelection, computerSelection);
@@ -48,15 +53,16 @@ function playGame() {
       message = `You Win! ${playerSelection} beats ${computerSelection}.`;
     } else if (round == -1) {
       computerScore++;
-      message = `You Lose! ${computerSelection} beats ${playerSelection}.`
+      message = `You Lose! ${computerSelection} beats ${playerSelection}.`;
     } else {
-      i--;
-      message = `Invalid Input. Try again`
+      i--; // restart round if user input is invalid
+      message = `Invalid Input. Try again`;
     }
 
-    alert(message + ` ${userScore}-${tie}-${computerScore}`)
+    alert(message + ` ${userScore}-${tie}-${computerScore}`);
   }
 
+  // after 5 rounds, declare a winner, display score
   if (userScore > computerScore) {
     alert(`Game end: You won! ${userScore} - ${computerScore}`);
   } else if (userScore == computerScore) {
