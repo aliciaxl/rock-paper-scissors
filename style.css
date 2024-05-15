@@ -23,6 +23,10 @@ body {
     align-items: center;
 }
 
+#subheading {
+    color: white;
+}
+
 .buttons {
     display: flex;
     flex-direction: row;
